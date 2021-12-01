@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>Woodcutter</title>
+    </head>
+    
+    <body>
+        <div class="content">
+            Woodcutter Beta 0.1.1c
+            <div class="variables">
+                <script>
+                    axestrength = 0;
+                    wood = 0;
+                    money = 0;
+                    totalchops = 0;
+                    axelevel = 0;
+                    lumberjackcount = 0
+                    lumberjackprice = 100
+                    axeupgradeprice = 50
+                    autosharpener = "no"
+                    setInterval(LumberjackChop, 1)
+                    function LumberjackChop(){
+                        wood += (0.0075*lumberjackcount)
+                        document.getElementById("wood").innerHTML = Math.floor(wood)
+                    }
+                    setInterval(autosharpen, 250)
+                    function autosharpen(){
+                        if(autosharpener == "yes")
+                            if(axestrength <= 99){
+                            axestrength += 1
+                            document.getElementById("axestrength").innerHTML = axestrength}
+                    }
+                    function buy10lumberjack(){
+                        {if(money > (10*(lumberjackprice-0.1))){
+                                lumberjackcount += 10
+                                document.getElementById("lumberjackcount").innerHTML = lumberjackcount;
+                                money -= (10*lumberjackprice)
+                                document.getElementById("money").innerHTML = Math.round(money)
+                                message = "You have hired several lumberjacks!"
+                                document.getElementById("message").innerHTML = message
+                                lumberjackprice = (lumberjackprice*(1.1)^10)
+                                document.getElementById("lumberjackprice").innerHTML = Math.floor(lumberjackprice)
+                                tenlumberjackprice = (lumberjackprice*10)
+                                document.getElementById("tenlumberjackprice").innerHTML = Math.floor(tenlumberjackprice)
+
+                            }
+                        else{
+                            message = "You don't have enough money!"
+                            document.getElementById("message").innerHTML = message
+                            }
+                        }
+                    }
+                    function buylumberjack(){
+                        {if(money >= (lumberjackprice-0.)){
+                                lumberjackcount += 1
+                                document.getElementById("lumberjackcount").innerHTML = lumberjackcount;
+                                money -= lumberjackprice
+                                document.getElementById("money").innerHTML = Math.round(money)
+                                message = "You have hired a lumberjack!"
+                                document.getElementById("message").innerHTML = message
+                                lumberjackprice = (lumberjackprice*1.1)
+                                document.getElementById("lumberjackprice").innerHTML = Math.floor(lumberjackprice)
+                                tenlumberjackprice = (lumberjackprice*10)
+                                document.getElementById("tenlumberjackprice").innerHTML = Math.floor(tenlumberjackprice)
+                            }
+                        else{
+                            message = "You don't have enough money!"
+                            document.getElementById("message").innerHTML = message
+                            }
+                        }
+                    }
+                    
+                    function chop() {
+                        if(axestrength > 0){
+                            totalchops += 1
+                            document.getElementById("totalchops").innerHTML = totalchops
+                            wood += (1 + (1.5*axelevel*(axestrength/100)) + (axestrength/25));
+                            document.getElementById("wood").innerHTML = Math.floor(wood);
+                            message = ""
+                            document.getElementById("message").innerHTML = message;
+                            if(axestrength >= (6 - (axelevel/2))){
+                                axestrength -= (6 - (axelevel/2))
+                                document.getElementById("axestrength").innerHTML = axestrength}
+                            else{
+                                axestrength = 0
+                                document.getElementById("axestrength").innerHTML = axestrength
+                            }
+                        }
+                        else{message = "Your axe is too dull to chop any wood."
+                        document.getElementById("message").innerHTML = message
+                        }
+                        
+                    }; // this creates a function which is called "chop" and will add to the value "wood."
+                    
+                    function sharpen() {
+                        message = ""
+                        document.getElementById("message").innerHTML = message;
+                        if(axestrength >= 75){
+                            axestrength = 100
+                            message = "Your axe is as sharp as possible."
+                            document.getElementById("message").innerHTML = message
+                            document.getElementById("axestrength").innerHTML = Math.round(axestrength)}
+                        else{
+                        axestrength += 25
+                        document.getElementById("axestrength").innerHTML = Math.round(axestrength)
+                        message = "You sharpen your axe. Good for woodcutting."
+                        document.getElementById("message").innerHTML = message}
+            
+                    };
+                    function resetall() {
+                        axestrength = 0;
+                        wood = 0;
+                        money = 0;
+                        totalchops = 0;
+                        axelevel = 0;
+                        lumberjackcount = 0
+                        lumberjackprice = 100
+                        axeupgradeprice = 50
+                        autosharpener = "no"
+                        autosharpenerbought = "$750"
+                        document.getElementById("wood").innerHTML = wood;
+                        document.getElementById("axestrength").innerHTML = axestrength;
+                        document.getElementById("totalchops").innerHTML = totalchops;
+                        document.getElementById("money").innerHTML = Math.floor(money);
+                        document.getElementById("axelevel").innerHTML = axelevel;
+                        document.getElementById("lumberjackprice").innerHTML = lumberjackprice
+                        document.getElementById("lumberjackcount").innerHTML = lumberjackcount
+                        document.getElementById("axeupgradeprice").innerHTML = axeupgradeprice
+                        document.getElementById("autosharpener").innerHTML = autosharpener
+                        document.getElementById("autosharpenerbought").innerHTML = autosharpenerbought
+                        message = "You reset the game. All your wood-chopping progress is gone, you fuck."
+                        document.getElementById("message").innerHTML = message;
+
+                    }; // this creates a function which is called "resetitall" that messages the value of "wood" to zero.
+                    function messagereset(){
+                        message = ""
+                    }
+                    function sellwood(){
+                        if(wood > 1){
+                            wood -= 1
+                            document.getElementById("wood").innerHTML = Math.floor(wood);
+                            money += 1
+                            document.getElementById("money").innerHTML = Math.floor(money);
+    
+                        }
+                        else{
+                            message = "You don't have enough wood!"
+                            document.getElementById("message").innerHTML = message;
+                        }
+                    
+                    }
+                    function sell10wood(){
+                        if(wood >= 10){
+                            wood -= 10
+                            document.getElementById("wood").innerHTML = Math.floor(wood);
+                            money += 10
+                            document.getElementById("money").innerHTML = Math.floor(money);
+    
+                        }
+                        else{
+                            message = "You don't have enough wood!"
+                            document.getElementById("message").innerHTML = message;
+                        }
+                    
+                    }
+                    function sell100wood(){
+                        if(wood >= 100){
+                            wood -= 100
+                            document.getElementById("wood").innerHTML = Math.floor(wood);
+                            money += 100
+                            document.getElementById("money").innerHTML = Math.floor(money);
+    
+                        }
+                        else{
+                            message = "You don't have enough wood!"
+                            document.getElementById("message").innerHTML = message;
+                        }
+                    
+                    }
+                    function sellallwood(){
+                        
+                        money += wood
+                        wood = 0
+                        document.getElementById("wood").innerHTML = Math.floor(wood);
+                        document.getElementById("money").innerHTML = Math.floor(money);
+    
+
+                    
+                    }
+                    function upgradeaxe(){
+                        if(axelevel >= 10){
+                            message = "Your axe is at the maximum level!"
+                            document.getElementById("message").innerHTML = message
+                            axeupgradeprice = "MAX"
+                            document.getElementById("axeupgradeprice").innerHTML = axeupgradeprice
+                        }
+                        else
+                            {if(money >= axeupgradeprice){
+                                axelevel += 1
+                                document.getElementById("axelevel").innerHTML = axelevel;
+                                money -= axeupgradeprice
+                                document.getElementById("money").innerHTML = Math.round(money)
+                                message = "Your axe has been upgraded!"
+                                document.getElementById("message").innerHTML = message
+                                axeupgradeprice = (axeupgradeprice*1.5)
+                                document.getElementById("axeupgradeprice").innerHTML = Math.ceil(axeupgradeprice)
+
+                            }
+                            else{
+                                message = "You don't have enough money!"
+                                document.getElementById("message").innerHTML = message
+                            }
+                        }
+                    }
+                    function rich(){
+                        wood += 1000000
+                        document.getElementById("wood").innerHTML = Math.round(wood)
+                    }
+                    function axemax(){
+                        axelevel = 10
+                        document.getElementById("axelevel").innerHTML =  axelevel
+                    }
+
+                    function buyautosharpener(){
+                        if(money >= 750){
+                            if(autosharpener == "no"){
+                                autosharpener = "yes"
+                                document.getElementById("autosharpener").innerHTML = autosharpener
+                                money -= 750
+                                document.getElementById("money").innerHTML = Math.floor(money)
+                                autosharpenerbought = "MAX"
+                                document.getElementById("autosharpenerbought").innerHTML = autosharpenerbought}
+                            else{
+                                message = "You already have an autosharpener!"
+                                document.getElementById("message").innerHTML = message
+                            }}
+
+                        else{
+                            message = "You don't have enough money!"
+                            document.getElementById("message").innerHTML = message
+                        }
+
+                    }
+                </script>
+            </div>
+            <div class="developertools">
+            </div>
+
+            <div class="menu">
+                
+                <br><h2>Wood: <a id="wood">0</a></h2>
+                
+                
+                <br>
+                <button type="button" onclick="chop()">Chop</button> 
+                <button type="button" onclick="sharpen()">Sharpen Axe</button>
+                <br>Total Chops: <a id="totalchops">0</a>
+                
+                <br>Axe Sharpness: <a id="axestrength">0</a>%
+                <br>Axe Level: <a id="axelevel">0</a>
+                <br>Lumberjacks: <a id="lumberjackcount">0</a>
+                <br> Autosharpener: <a id="autosharpener">no</a>
+                <br>---------------------------
+                
+                
+                
+                </a>
+
+                <div class="market">
+                    <br>Marketplace
+                    <br>---------------------------
+                    <br>Money: $<a id="money">0</a>
+                    <br>Sell Wood <button type="button" onclick="sellwood()">1</button> 
+                    <button type="button" onclick="sell10wood()">10</button> 
+                    <button type="button" onclick="sell100wood()">100</button>
+                    <button type="button" onclick="sellallwood()">ALL</button> 
+                    <br>
+                    <br>Upgrade Axe <button type="button" onclick="upgradeaxe()">$<a id="axeupgradeprice">50</a></button> 
+                    <br>Buy Autosharpener <button type="button" onclick="buyautosharpener()"><a id="autosharpenerbought">$750</a></button> 
+                    <br>Hire Lumberjack <button type="button" onclick="buylumberjack()">$<a id="lumberjackprice">100</a></button>
+                    <br>Hire 10 Lumberjack <button type="button" onclick="buy10lumberjack()">$<a id="tenlumberjackprice">1000</a></button>  
+                    
+                    <br>---------------------------
+                    <br>
+                    <button type="button" onclick="resetall()">Start over, just for fun</button>
+                    <p> 
+                
+                        <a id="message">Welcome to Woodcutter! This little HTML game was coded in the course of about 2 hours by myself, Caleb Norris! 
+                            <br> That's about it! Happy chopping!
+                </div>
+                <script>
+                   
+                    
+                </script>
+            </div>
+        </div>
+
+            
+    
+    </body></html>

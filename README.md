@@ -1,2 +1,0 @@
-# Woodcutter
-Woodcutter game!
